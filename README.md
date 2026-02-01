@@ -5,11 +5,9 @@
 </h1>
 
 <p align="center">
-	<img alt="NPM Version" src="https://img.shields.io/npm/v/n8n-nodes-resend">
-	<img alt="GitHub License" src="https://img.shields.io/github/license/SilkePilon/n8n-nodes-resend">
-	<img alt="NPM Downloads" src="https://img.shields.io/npm/dm/n8n-nodes-resend">
-	<img alt="NPM Last Update" src="https://img.shields.io/npm/last-update/n8n-nodes-resend">
-	<img alt="n8n community node" src="https://img.shields.io/badge/n8n-community_node-blue?logo=n8n">
+	<a href="https://www.npmjs.com/package/n8n-nodes-resend"><img alt="NPM Version" src="https://img.shields.io/npm/v/n8n-nodes-resend"></a>
+	<a href="https://www.npmjs.com/package/n8n-nodes-resend"><img alt="NPM Downloads" src="https://img.shields.io/npm/dm/n8n-nodes-resend"></a>
+	<img alt="GitHub License" src="https://img.shields.io/github/license/Everyday-Workflows/n8n-nodes-resend-full">
 </p>
 
 <p align="center">
@@ -47,18 +45,20 @@ Comprehensive coverage of the Resend API (v1.1.0). The table below shows which e
 
 ## Installation
 
-### Community Nodes (Recommended)
-
-1. Go to **Settings** > **Community Nodes**
-2. Click **Install a community node**
-3. Enter `n8n-nodes-resend`
-4. Restart n8n
-
-### Manual Installation
+To install this node, you can use the n8n community nodes interface or run the following command in your n8n installation directory:
 
 ```bash
-cd ~/.n8n
 npm install n8n-nodes-resend
+```
+
+For development, you can clone the repository and link it locally:
+
+```bash
+git clone https://github.com/Everyday-Workflows/n8n-nodes-resend-full.git
+cd n8n-nodes-resend-full
+npm install
+npm run build
+npm link
 ```
 
 ### Docker
@@ -166,6 +166,11 @@ All operations are available with enhanced descriptions for AI understanding:
 4. **Test First**: Use test mode or sandbox environments when possible
 
 ## Resources
+
+- [Resend API Documentation](https://resend.com/docs/api-reference)
+- [n8n Community Nodes Documentation](https://docs.n8n.io/integrations/community-nodes/)
+- [GitHub Repository](https://github.com/Everyday-Workflows/n8n-nodes-resend-full)
+- [Issue Tracker](https://github.com/Everyday-Workflows/n8n-nodes-resend-full/issues)
 
 ### Email
 
@@ -327,8 +332,8 @@ The **Resend Trigger** node receives webhooks for real-time email events. Signat
 ## Development
 
 ```bash
-git clone https://github.com/SilkePilon/n8n-nodes-resend.git
-cd n8n-nodes-resend
+git clone https://github.com/Everyday-Workflows/n8n-nodes-resend-full.git
+cd n8n-nodes-resend-full
 npm install
 npm run build
 npm run lint
@@ -345,7 +350,7 @@ Enhanced with contributions from [jannispkz/n8n-nodes-resend-complete](https://g
 ---
 
 <p align="center">
-  <a href="https://github.com/SilkePilon/n8n-nodes-resend">GitHub</a> |
-  <a href="https://github.com/SilkePilon/n8n-nodes-resend/issues">Issues</a> |
+  <a href="https://github.com/Everyday-Workflows/n8n-nodes-resend-full">GitHub</a> |
+  <a href="https://github.com/Everyday-Workflows/n8n-nodes-resend-full/issues">Issues</a> |
   <a href="https://resend.com/docs">Resend Docs</a>
 </p>
