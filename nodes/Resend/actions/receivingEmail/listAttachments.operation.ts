@@ -28,7 +28,7 @@ export const description: INodeProperties[] = [
 				operation: ['listAttachments'],
 			},
 		},
-		description: 'Whether to return all attachments or only up to the specified limit. Set to true to retrieve all attachments regardless of quantity.',
+		description: 'Whether to return all results or only up to a given limit',
 	},
 	{
 		displayName: 'Limit',
@@ -45,7 +45,36 @@ export const description: INodeProperties[] = [
 				returnAll: [false],
 			},
 		},
-		description: 'Maximum number of attachments to return. Use a smaller value for faster responses.',
+		description: 'Max number of results to return',
+	},
+	{
+		displayName: 'Additional Fields',
+		name: 'additionalFields',
+		type: 'collection',
+		placeholder: 'Add Field',
+		default: {},
+		displayOptions: {
+			show: {
+				resource: ['receivingEmails'],
+				operation: ['listAttachments'],
+			},
+		},
+		options: [
+			{
+				displayName: 'After',
+				name: 'after',
+				type: 'string',
+				default: '',
+				description: 'Cursor for pagination - ID of the last item from the previous page. Use this to fetch the next page of results.',
+			},
+			{
+				displayName: 'Before',
+				name: 'before',
+				type: 'string',
+				default: '',
+				description: 'Cursor for pagination - ID of the first item from the next page. Use this to fetch the previous page of results.',
+			},
+		],
 	},
 ];
 
@@ -56,10 +85,22 @@ export async function execute(
 	const emailId = this.getNodeParameter('receivedEmailIdForAttachments', index) as string;
 	const returnAll = this.getNodeParameter('returnAll', index, false) as boolean;
 	const limit = this.getNodeParameter('limit', index, 50) as number;
+	const additionalFields = this.getNodeParameter('additionalFields', index, {}) as {
+		after?: string;
+		before?: string;
+	};
 
 	const qs: IDataObject = {};
 	if (!returnAll) {
 		qs.limit = limit;
+	}
+
+	if (additionalFields.after) {
+		qs.after = additionalFields.after;
+	}
+
+	if (additionalFields.before) {
+		qs.before = additionalFields.before;
 	}
 
 	const response = await apiRequest.call(

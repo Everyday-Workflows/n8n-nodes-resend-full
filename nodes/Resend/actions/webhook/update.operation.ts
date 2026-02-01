@@ -32,7 +32,7 @@ export const description: INodeProperties[] = [
 		},
 		options: [
 			{
-				displayName: 'Endpoint',
+				displayName: 'Webhook URL',
 				name: 'endpoint',
 				type: 'string',
 				default: '',
@@ -45,7 +45,7 @@ export const description: INodeProperties[] = [
 				type: 'multiOptions',
 				default: ['email.sent'],
 				options: webhookEventOptions,
-				description: 'Update which email events should trigger webhook notifications.',
+				description: 'Update which email events should trigger webhook notifications',
 			},
 			{
 				displayName: 'Status',
@@ -77,7 +77,24 @@ export async function execute(
 		assertHttpsEndpoint(updateFields.endpoint);
 	}
 
-	const response = await apiRequest.call(this, 'PATCH', `/webhooks/${webhookId}`, updateFields);
+	// Map 'endpoint' to 'url' for the Resend API
+	const body: {
+		url?: string;
+		events?: string[];
+		status?: string;
+	} = {};
+
+	if (updateFields.endpoint) {
+		body.url = updateFields.endpoint;
+	}
+	if (updateFields.events) {
+		body.events = updateFields.events;
+	}
+	if (updateFields.status) {
+		body.status = updateFields.status;
+	}
+
+	const response = await apiRequest.call(this, 'PATCH', `/webhooks/${webhookId}`, body);
 
 	return [{ json: response }];
 }

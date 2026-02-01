@@ -31,6 +31,27 @@ export const description: INodeProperties[] = [
 		},
 		options: [
 			{
+				displayName: 'Click Tracking',
+				name: 'click_tracking',
+				type: 'boolean',
+				default: false,
+				description: 'Whether to track clicks within the body of each HTML email sent from this domain',
+			},
+			{
+				displayName: 'Custom Return Path',
+				name: 'custom_return_path',
+				type: 'string',
+				default: 'send',
+				description: 'Custom subdomain for email bounce handling (Return-Path address). Defaults to "send". This subdomain needs to be configured in your DNS.',
+			},
+			{
+				displayName: 'Open Tracking',
+				name: 'open_tracking',
+				type: 'boolean',
+				default: false,
+				description: 'Whether to track the open rate of each email sent from this domain',
+			},
+			{
 				displayName: 'Region',
 				name: 'region',
 				type: 'options',
@@ -44,11 +65,15 @@ export const description: INodeProperties[] = [
 				description: 'The AWS region where emails will be sent from. Choose a region closest to your recipients for better deliverability.',
 			},
 			{
-				displayName: 'Custom Return Path',
-				name: 'custom_return_path',
-				type: 'string',
-				default: 'send',
-				description: 'Custom subdomain for email bounce handling (Return-Path address). Defaults to "send". This subdomain needs to be configured in your DNS.',
+				displayName: 'TLS',
+				name: 'tls',
+				type: 'options',
+				options: [
+					{ name: 'Opportunistic', value: 'opportunistic' },
+					{ name: 'Enforced', value: 'enforced' },
+				],
+				default: 'opportunistic',
+				description: 'Configures TLS for email communication. Opportunistic uses TLS when available, Enforced requires TLS for all emails.',
 			},
 		],
 	},
@@ -62,6 +87,9 @@ export async function execute(
 	const additionalOptions = this.getNodeParameter('additionalOptions', index, {}) as {
 		region?: string;
 		custom_return_path?: string;
+		tls?: string;
+		open_tracking?: boolean;
+		click_tracking?: boolean;
 	};
 
 	const body: IDataObject = { name };
@@ -71,6 +99,15 @@ export async function execute(
 	}
 	if (additionalOptions.custom_return_path) {
 		body.custom_return_path = additionalOptions.custom_return_path;
+	}
+	if (additionalOptions.tls) {
+		body.tls = additionalOptions.tls;
+	}
+	if (additionalOptions.open_tracking !== undefined) {
+		body.open_tracking = additionalOptions.open_tracking;
+	}
+	if (additionalOptions.click_tracking !== undefined) {
+		body.click_tracking = additionalOptions.click_tracking;
 	}
 
 	const response = await apiRequest.call(this, 'POST', '/domains', body);

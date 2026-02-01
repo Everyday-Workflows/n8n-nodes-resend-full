@@ -43,7 +43,7 @@ export const description: INodeProperties[] = [
 				operation: ['listSegments'],
 			},
 		},
-		description: 'Whether to return all segment memberships or only up to the specified limit. Set to true to retrieve all segments regardless of quantity.',
+		description: 'Whether to return all results or only up to a given limit',
 	},
 	{
 		displayName: 'Limit',
@@ -60,7 +60,7 @@ export const description: INodeProperties[] = [
 				returnAll: [false],
 			},
 		},
-		description: 'Maximum number of segment memberships to return. Use a smaller value for faster responses.',
+		description: 'Max number of results to return',
 	},
 ];
 

@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-resend",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "Resend integration for n8n with full API coverage: Email, Broadcasts, Templates, Domains, Contacts, Segments, Topics, Webhooks, and more",
   "keywords": [
     "n8n-community-node-package",
@@ -15,14 +15,14 @@
     "contacts"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/SilkePilon/n8n-nodes-resend/",
+  "homepage": "https://github.com/Everyday-Workflows/n8n-nodes-resend-full/",
   "author": {
-    "name": "SilkePilon",
-    "email": "silkepilon@users.noreply.github.com"
+    "name": "Everyday Workflows",
+    "email": "hello@everydayworkflows.com"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SilkePilon/n8n-nodes-resend.git"
+    "url": "git+https://github.com/Everyday-Workflows/n8n-nodes-resend-full.git"
   },
   "engines": {
     "node": ">=20.15"
@@ -34,7 +34,8 @@
     "format": "prettier nodes credentials --write",
     "lint": "eslint nodes credentials",
     "lintfix": "eslint nodes credentials --fix",
-    "prepublishOnly": "npm run build && npm run lint"
+    "prepublishOnly": "npm run build && npm run lint",
+    "test": "jest"
   },
   "files": [
     "dist"
@@ -53,14 +54,16 @@
     "isbot": "^3.6.13"
   },
   "devDependencies": {
-    "@types/jest": "^30.0.0",
+    "@types/jest": "^29.5.14",
     "@types/node": "^22.15.21",
     "@typescript-eslint/parser": "~8.54.0",
     "eslint": "^9.39.2",
     "eslint-plugin-n8n-nodes-base": "^1.16.5",
     "gulp": "^5.0.0",
+    "jest": "^29.7.0",
     "n8n-workflow": "^2.6.0",
     "prettier": "^3.5.3",
+    "ts-jest": "^29.2.6",
     "typescript": "^5.9.3"
   },
   "peerDependencies": {

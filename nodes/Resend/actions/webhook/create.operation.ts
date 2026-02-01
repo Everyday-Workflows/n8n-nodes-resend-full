@@ -4,7 +4,7 @@ import { webhookEventOptions } from './index';
 
 export const description: INodeProperties[] = [
 	{
-		displayName: 'Endpoint',
+		displayName: 'Webhook URL',
 		name: 'webhookEndpoint',
 		type: 'string',
 		required: true,
@@ -45,7 +45,7 @@ export async function execute(
 	assertHttpsEndpoint(endpoint);
 
 	const body: IDataObject = {
-		endpoint,
+		url: endpoint,
 		events,
 	};
 

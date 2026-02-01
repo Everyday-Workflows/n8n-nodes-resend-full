@@ -1,0 +1,19 @@
+name: OpenCode Workflow
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, master]
+
+jobs:
+  opencode:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: OpenCode
+        uses: anomalyco/opencode/github@latest
+        with:
+          model: 'claude-opus-4.5'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}

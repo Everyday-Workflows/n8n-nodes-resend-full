@@ -16,6 +16,7 @@
   <a href="#installation">Installation</a> |
   <a href="#credentials">Credentials</a> |
   <a href="#human-in-the-loop">Human in the Loop</a> |
+  <a href="#ai-agent-tool-support">AI Agent Tool Support</a> |
   <a href="#resources">Resources</a> |
   <a href="#trigger-events">Trigger Events</a> |
   <a href="#development">Development</a>
@@ -102,6 +103,67 @@ The **Send and Wait for Response** operation enables human-in-the-loop workflows
 | **Message Button Label** | Label for the form link button (Free Text mode)          |
 | **Response Form Title**  | Title shown on the response form                         |
 | **Limit Wait Time**      | Set a timeout for the wait period                        |
+
+## AI Agent Tool Support
+
+This node is **AI Agent compatible** and can be used directly by n8n AI agents (requires n8n v1.79.0+).
+
+### Features
+
+- **Automatic Tool Discovery**: AI agents can discover and use all Resend operations
+- **Dynamic Parameters**: Use `$fromAI()` to let agents provide values at runtime
+- **Natural Language**: Agents understand operation descriptions and parameters
+- **Full API Coverage**: All 12 resources available to AI agents
+
+### Requirements
+
+1. **n8n Version**: 1.79.0 or higher
+2. **Environment Variable**: Set `N8N_COMMUNITY_PACKAGES_ALLOW_TOOL_USAGE=true`
+3. **AI Agent Node**: Connect Resend node to an AI Agent workflow
+
+### Using $fromAI() for Dynamic Parameters
+
+The `$fromAI()` function allows AI agents to provide parameter values dynamically:
+
+```javascript
+// Example: Let AI agent determine recipient email
+{{ $fromAI('to', 'The recipient email address', 'string') }}
+
+// Example: Let AI agent write email subject
+{{ $fromAI('subject', 'Email subject line', 'string') }}
+
+// Example: Let AI agent compose email body
+{{ $fromAI('html', 'HTML email content', 'string') }}
+```
+
+### Example AI Agent Workflow
+
+1. Add an **AI Agent** node to your workflow
+2. Connect the **Resend** node as a tool
+3. Configure the Resend node with `$fromAI()` for dynamic fields:
+   - **To**: `{{ $fromAI('to', 'Recipient email address', 'string') }}`
+   - **Subject**: `{{ $fromAI('subject', 'Email subject', 'string') }}`
+   - **HTML**: `{{ $fromAI('html', 'Email body in HTML', 'string') }}`
+4. The AI agent will automatically fill these values based on context
+
+### Available Operations for AI Agents
+
+All operations are available with enhanced descriptions for AI understanding:
+
+- **Email**: Send, send batch, list, get, cancel, update
+- **Templates**: Create, update, publish, duplicate, delete
+- **Contacts**: Create, update, delete, manage segments and topics
+- **Broadcasts**: Create, send, update, delete campaigns
+- **Domains**: Add, verify, update sending domains
+- **Webhooks**: Create, update, delete event listeners
+- **And 6 more resources** (Audiences, Segments, Topics, API Keys, Contact Properties, Receiving Emails)
+
+### Best Practices
+
+1. **Use Descriptive Prompts**: Help the AI understand what you want to accomplish
+2. **Validate Outputs**: Review AI-generated emails before sending
+3. **Set Constraints**: Use validation rules for critical fields like email addresses
+4. **Test First**: Use test mode or sandbox environments when possible
 
 ## Resources
 
@@ -242,10 +304,14 @@ The **Resend Trigger** node receives webhooks for real-time email events. Signat
 | `email.sent`             | Email sent to recipient      |
 | `email.delivered`        | Email delivered successfully |
 | `email.delivery_delayed` | Email delivery delayed       |
-| `email.opened`           | Recipient opened the email   |
-| `email.clicked`          | Link clicked in email        |
 | `email.bounced`          | Email bounced                |
+| `email.clicked`          | Link clicked in email        |
 | `email.complained`       | Spam complaint received      |
+| `email.failed`           | Email failed to send         |
+| `email.opened`           | Recipient opened the email   |
+| `email.received`         | Inbound email received       |
+| `email.scheduled`        | Email scheduled for sending  |
+| `email.suppressed`       | Email suppressed (blocked)   |
 | `contact.created`        | New contact added            |
 | `contact.updated`        | Contact modified             |
 | `contact.deleted`        | Contact removed              |

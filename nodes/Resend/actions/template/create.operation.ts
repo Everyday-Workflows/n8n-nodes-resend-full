@@ -68,6 +68,52 @@ export const description: INodeProperties[] = [
 		description: 'HTML content of the template. Use {{{VARIABLE|fallback}}} syntax for dynamic content. Variables are replaced when sending emails.',
 	},
 	{
+		displayName: 'Alias',
+		name: 'templateAlias',
+		type: 'string',
+		default: '',
+		placeholder: 'my-template-alias',
+		displayOptions: {
+			show: {
+				resource: ['templates'],
+				operation: ['create'],
+			},
+		},
+		description: 'Optional alias for the template. Allows you to reference the template by a custom identifier instead of the auto-generated ID.',
+	},
+	{
+		displayName: 'Reply To',
+		name: 'templateReplyTo',
+		type: 'string',
+		default: '',
+		placeholder: 'support@resend.com',
+		displayOptions: {
+			show: {
+				resource: ['templates'],
+				operation: ['create'],
+			},
+		},
+		description: 'Default reply-to email address for emails using this template. When recipients reply, their response will be sent to this address.',
+	},
+	{
+		displayName: 'Text',
+		name: 'templateText',
+		type: 'string',
+		default: '',
+		typeOptions: {
+			multiline: true,
+			rows: 4,
+		},
+		placeholder: 'Name: {{{PRODUCT}}}\nTotal: {{{PRICE}}}',
+		displayOptions: {
+			show: {
+				resource: ['templates'],
+				operation: ['create'],
+			},
+		},
+		description: 'Plain text version of the email template. Used as fallback for email clients that don\'t support HTML. Can include the same template variables as HTML content.',
+	},
+	{
 		displayName: 'Template Variables',
 		name: 'templateVariables',
 		type: 'fixedCollection',
@@ -133,6 +179,9 @@ export async function execute(
 	const from = this.getNodeParameter('templateFrom', index) as string;
 	const subject = this.getNodeParameter('templateSubject', index) as string;
 	const html = this.getNodeParameter('templateHtml', index) as string;
+	const alias = this.getNodeParameter('templateAlias', index, '') as string;
+	const replyTo = this.getNodeParameter('templateReplyTo', index, '') as string;
+	const text = this.getNodeParameter('templateText', index, '') as string;
 	const templateVariables = this.getNodeParameter('templateVariables', index, {
 		variables: [],
 	}) as { variables: TemplateVariable[] };
@@ -143,6 +192,17 @@ export async function execute(
 		subject,
 		html,
 	};
+
+	// Add optional fields if provided
+	if (alias) {
+		body.alias = alias;
+	}
+	if (replyTo) {
+		body.reply_to = replyTo;
+	}
+	if (text) {
+		body.text = text;
+	}
 
 	if (templateVariables.variables && templateVariables.variables.length > 0) {
 		const variables: Record<string, { type: string; fallback_value?: string }> = {};

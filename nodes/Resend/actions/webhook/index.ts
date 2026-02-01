@@ -17,8 +17,12 @@ export const webhookEventOptions: INodePropertyOptions[] = [
 	{ name: 'Email Complained', value: 'email.complained' },
 	{ name: 'Email Delivered', value: 'email.delivered' },
 	{ name: 'Email Delivery Delayed', value: 'email.delivery_delayed' },
+	{ name: 'Email Failed', value: 'email.failed' },
 	{ name: 'Email Opened', value: 'email.opened' },
+	{ name: 'Email Received', value: 'email.received' },
+	{ name: 'Email Scheduled', value: 'email.scheduled' },
 	{ name: 'Email Sent', value: 'email.sent' },
+	{ name: 'Email Suppressed', value: 'email.suppressed' },
 ];
 
 export const operations: INodeProperties[] = [
