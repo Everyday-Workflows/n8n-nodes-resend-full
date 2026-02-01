@@ -5,8 +5,8 @@
 </h1>
 
 <p align="center">
-	<a href="https://www.npmjs.com/package/n8n-nodes-resend"><img alt="NPM Version" src="https://img.shields.io/npm/v/n8n-nodes-resend"></a>
-	<a href="https://www.npmjs.com/package/n8n-nodes-resend"><img alt="NPM Downloads" src="https://img.shields.io/npm/dm/n8n-nodes-resend"></a>
+	<a href="https://www.npmjs.com/package/n8n-nodes-resend-full"><img alt="NPM Version" src="https://img.shields.io/npm/v/n8n-nodes-resend-full"></a>
+	<a href="https://www.npmjs.com/package/n8n-nodes-resend-full"><img alt="NPM Downloads" src="https://img.shields.io/npm/dm/n8n-nodes-resend-full"></a>
 	<img alt="GitHub License" src="https://img.shields.io/github/license/Everyday-Workflows/n8n-nodes-resend-full">
 </p>
 
@@ -48,7 +48,7 @@ Comprehensive coverage of the Resend API (v1.1.0). The table below shows which e
 To install this node, you can use the n8n community nodes interface or run the following command in your n8n installation directory:
 
 ```bash
-npm install n8n-nodes-resend
+npm install n8n-nodes-resend-full
 ```
 
 For development, you can clone the repository and link it locally:
