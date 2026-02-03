@@ -1,57 +1,114 @@
 <h1 align="center">
   <br>
-  <a href="/"><img src=".github/media/resend-header.png" alt="n8n-nodes-resend" width="900"></a>
+  <a href="https://github.com/Everyday-Workflows/n8n-nodes-resend-full">
+    <img src=".github/media/resend-header.png" alt="n8n-nodes-resend-full" width="900">
+  </a>
+  <br>
   <br>
 </h1>
 
 <p align="center">
-	<a href="https://www.npmjs.com/package/n8n-nodes-resend-full"><img alt="NPM Version" src="https://img.shields.io/npm/v/n8n-nodes-resend-full"></a>
-	<a href="https://www.npmjs.com/package/n8n-nodes-resend-full"><img alt="NPM Downloads" src="https://img.shields.io/npm/dm/n8n-nodes-resend-full"></a>
-	<img alt="GitHub License" src="https://img.shields.io/github/license/Everyday-Workflows/n8n-nodes-resend-full">
+  <a href="https://www.npmjs.com/package/n8n-nodes-resend-full">
+    <img alt="NPM Version" src="https://img.shields.io/npm/v/n8n-nodes-resend-full?style=flat-square&color=blue">
+  </a>
+  <a href="https://www.npmjs.com/package/n8n-nodes-resend-full">
+    <img alt="NPM Downloads" src="https://img.shields.io/npm/dm/n8n-nodes-resend-full?style=flat-square&color=green">
+  </a>
+  <a href="https://github.com/Everyday-Workflows/n8n-nodes-resend-full/blob/main/LICENSE.md">
+    <img alt="License" src="https://img.shields.io/github/license/Everyday-Workflows/n8n-nodes-resend-full?style=flat-square&color=yellow">
+  </a>
+  <a href="https://github.com/Everyday-Workflows/n8n-nodes-resend-full/issues">
+    <img alt="Issues" src="https://img.shields.io/github/issues/Everyday-Workflows/n8n-nodes-resend-full?style=flat-square&color=red">
+  </a>
 </p>
 
 <p align="center">
-  <a href="#installation">Installation</a> |
-  <a href="#credentials">Credentials</a> |
-  <a href="#human-in-the-loop">Human in the Loop</a> |
-  <a href="#ai-agent-tool-support">AI Agent Tool Support</a> |
-  <a href="#resources">Resources</a> |
-  <a href="#trigger-events">Trigger Events</a> |
-  <a href="#development">Development</a>
+  <strong>Complete Resend API integration for n8n</strong>
+</p>
+
+<p align="center">
+  <a href="#-quick-start">Quick Start</a> •
+  <a href="#-installation">Installation</a> •
+  <a href="#-features">Features</a> •
+  <a href="#-documentation">Documentation</a> •
+  <a href="#-contributing">Contributing</a>
 </p>
 
 ---
 
-A community node for [n8n](https://n8n.io) that integrates with the [Resend](https://resend.com) email API. Send emails, manage contacts, handle domains, and receive webhooks.
+## 📧 Overview
 
-## API Coverage
+**n8n-nodes-resend-full** is a community-built node that provides comprehensive integration between [n8n](https://n8n.io) and [Resend](https://resend.com) — the modern email platform for developers. Send transactional emails, manage contacts and audiences, handle domains, and receive real-time webhooks, all within your n8n workflows.
 
-Comprehensive coverage of the Resend API (v1.1.0). The table below shows which endpoints are currently implemented:
+### Use Cases
 
-| API Resource           | Endpoint                   | Status  | Operations                                                                                                       |
-| ---------------------- | -------------------------- | ------- | ---------------------------------------------------------------------------------------------------------------- |
-| **Email**              | `/emails`                  | ✅ Full | Send, Send Batch, Send and Wait, List, Get, Update, Cancel, List Attachments, Get Attachment                     |
-| **Receiving Emails**   | `/emails/receiving`        | ✅ Full | List, Get, List Attachments, Get Attachment                                                                      |
-| **Domains**            | `/domains`                 | ✅ Full | Create, List, Get, Update, Delete, Verify                                                                        |
-| **API Keys**           | `/api-keys`                | ✅ Full | Create, List, Delete                                                                                             |
-| **Templates**          | `/templates`               | ✅ Full | Create, List, Get, Update, Delete, Publish, Duplicate                                                            |
-| **Audiences**          | `/audiences`               | ✅ Full | Create, List, Get, Delete                                                                                        |
-| **Contacts**           | `/audiences/{id}/contacts` | ✅ Full | Create, List, Get, Update, Delete, Add to Segment, List Segments, Remove from Segment, Get Topics, Update Topics |
-| **Broadcasts**         | `/broadcasts`              | ✅ Full | Create, List, Get, Update, Delete, Send                                                                          |
-| **Segments**           | `/segments`                | ✅ Full | Create, List, Get, Delete                                                                                        |
-| **Topics**             | `/topics`                  | ✅ Full | Create, List, Get, Update, Delete                                                                                |
-| **Contact Properties** | `/contact-properties`      | ✅ Full | Create, List, Get, Update, Delete                                                                                |
-| **Webhooks**           | `/webhooks`                | ✅ Full | Create, List, Get, Update, Delete                                                                                |
+- **Marketing Automation**: Send personalized emails based on user behavior
+- **Transaction Notifications**: Order confirmations, shipping updates, password resets
+- **Approval Workflows**: Human-in-the-loop email approvals with buttons
+- **AI Email Agents**: Let AI agents compose and send contextual emails
+- **Contact Management**: Automate audience segmentation and contact updates
+- **Webhook Processing**: Real-time email delivery and engagement tracking
 
-## Installation
+---
 
-To install this node, you can use the n8n community nodes interface or run the following command in your n8n installation directory:
+## 🚀 Quick Start
+
+### 1. Install the Node
 
 ```bash
 npm install n8n-nodes-resend-full
 ```
 
-For development, you can clone the repository and link it locally:
+Or install via n8n Community Nodes UI.
+
+### 2. Configure Credentials
+
+1. Get your API key from [Resend Dashboard](https://resend.com/api-keys)
+2. In n8n, go to **Settings** → **Credentials**
+3. Click **Add credential**, search for **Resend API**
+4. Paste your API key
+
+### 3. Create Your First Workflow
+
+```
+[Trigger] → [Resend] → [Success Path]
+   ↓
+Send Email
+- To: {{ $json.email }}
+- Subject: Welcome!
+- HTML: <h1>Hello {{ $json.name }}</h1>
+```
+
+---
+
+## 📦 Installation
+
+### Method 1: n8n Community Nodes (Recommended)
+
+1. In your n8n instance, go to **Settings** → **Community Nodes**
+2. Click **Install**
+3. Enter: `n8n-nodes-resend-full`
+4. Restart n8n
+
+### Method 2: npm Installation
+
+```bash
+# In your n8n installation directory
+npm install n8n-nodes-resend-full
+
+# Restart n8n
+```
+
+### Method 3: Docker
+
+```bash
+docker run -it --rm \
+  -p 5678:5678 \
+  -e N8N_NODES_INCLUDE=n8n-nodes-resend-full \
+  n8nio/n8n
+```
+
+### Development Installation
 
 ```bash
 git clone https://github.com/Everyday-Workflows/n8n-nodes-resend-full.git
@@ -59,120 +116,82 @@ cd n8n-nodes-resend-full
 npm install
 npm run build
 npm link
+cd /path/to/n8n
+npm link n8n-nodes-resend-full
 ```
 
-### Docker
+---
 
-```bash
-docker run -it --rm \
-  -p 5678:5678 \
-  -e N8N_NODES_INCLUDE=n8n-nodes-resend \
-  n8nio/n8n
-```
+## ✨ Features
 
-## Credentials
+### 100% API Coverage
 
-1. Get your API key from [Resend Dashboard](https://resend.com/api-keys)
-2. In n8n, go to **Credentials** > **Add credential**
-3. Search for **Resend API** and paste your key
+Complete coverage of the Resend API (v1.1.0) with 12 resources and 60+ operations:
 
-## Human in the Loop
+| Resource               | Operations                                                              | Status  |
+| ---------------------- | ----------------------------------------------------------------------- | ------- |
+| **Email**              | Send, Send Batch, Send and Wait, List, Get, Update, Cancel, Attachments | ✅ Full |
+| **Receiving Emails**   | List, Get, Attachments                                                  | ✅ Full |
+| **Domains**            | Create, List, Get, Update, Delete, Verify                               | ✅ Full |
+| **API Keys**           | Create, List, Delete                                                    | ✅ Full |
+| **Templates**          | Create, List, Get, Update, Delete, Publish, Duplicate                   | ✅ Full |
+| **Audiences**          | Create, List, Get, Delete                                               | ✅ Full |
+| **Contacts**           | CRUD, Segments, Topics                                                  | ✅ Full |
+| **Broadcasts**         | Create, List, Get, Update, Delete, Send                                 | ✅ Full |
+| **Segments**           | Create, List, Get, Delete                                               | ✅ Full |
+| **Topics**             | Create, List, Get, Update, Delete                                       | ✅ Full |
+| **Contact Properties** | Create, List, Get, Update, Delete                                       | ✅ Full |
+| **Webhooks**           | Create, List, Get, Update, Delete                                       | ✅ Full |
 
-The **Send and Wait for Response** operation enables human-in-the-loop workflows. Send an email and pause the workflow until the recipient responds via approval buttons or a form.
+### Human-in-the-Loop (HITL)
 
-### Features
+The **Send and Wait for Response** operation enables human-in-the-loop workflows:
 
-- **Approval Workflows**: Send emails with Approve/Decline buttons for quick decisions
+- **Approval Workflows**: Send emails with Approve/Decline buttons
 - **Free Text Responses**: Collect text input via a response form
 - **Configurable Wait Time**: Set a timeout or wait indefinitely
 - **Secure Callbacks**: Responses use signed URLs for security
 
-### How to Use
+### AI Agent Support
 
-1. In the node panel, go to **Human in the Loop** > **Resend**
-2. Or select **Email** resource > **Send and Wait for Response** operation
+This node is fully compatible with n8n AI Agents (requires n8n v1.79.0+):
 
-### Configuration Options
-
-| Option                   | Description                                              |
-| ------------------------ | -------------------------------------------------------- |
-| **Response Type**        | Choose between Approval (buttons) or Free Text (form)    |
-| **Approval Type**        | Single button (Approve only) or Double (Approve/Decline) |
-| **Button Labels**        | Customize the button text                                |
-| **Button Styles**        | Primary or Secondary styling                             |
-| **Message Button Label** | Label for the form link button (Free Text mode)          |
-| **Response Form Title**  | Title shown on the response form                         |
-| **Limit Wait Time**      | Set a timeout for the wait period                        |
-
-## AI Agent Tool Support
-
-This node is **AI Agent compatible** and can be used directly by n8n AI agents (requires n8n v1.79.0+).
-
-### Features
-
-- **Automatic Tool Discovery**: AI agents can discover and use all Resend operations
+- **Automatic Tool Discovery**: AI agents can discover and use all operations
 - **Dynamic Parameters**: Use `$fromAI()` to let agents provide values at runtime
 - **Natural Language**: Agents understand operation descriptions and parameters
-- **Full API Coverage**: All 12 resources available to AI agents
 
-### Requirements
+**Requirements:**
 
-1. **n8n Version**: 1.79.0 or higher
-2. **Environment Variable**: Set `N8N_COMMUNITY_PACKAGES_ALLOW_TOOL_USAGE=true`
-3. **AI Agent Node**: Connect Resend node to an AI Agent workflow
+1. n8n Version: 1.79.0 or higher
+2. Environment Variable: `N8N_COMMUNITY_PACKAGES_ALLOW_TOOL_USAGE=true`
+3. AI Agent Node: Connect Resend node to an AI Agent workflow
 
-### Using $fromAI() for Dynamic Parameters
-
-The `$fromAI()` function allows AI agents to provide parameter values dynamically:
+**Example AI Parameters:**
 
 ```javascript
-// Example: Let AI agent determine recipient email
-{{ $fromAI('to', 'The recipient email address', 'string') }}
-
-// Example: Let AI agent write email subject
-{{ $fromAI('subject', 'Email subject line', 'string') }}
-
-// Example: Let AI agent compose email body
-{{ $fromAI('html', 'HTML email content', 'string') }}
+{
+	{
+		$fromAI('to', 'The recipient email address', 'string');
+	}
+}
+{
+	{
+		$fromAI('subject', 'Email subject line', 'string');
+	}
+}
+{
+	{
+		$fromAI('html', 'HTML email content', 'string');
+	}
+}
 ```
 
-### Example AI Agent Workflow
+---
 
-1. Add an **AI Agent** node to your workflow
-2. Connect the **Resend** node as a tool
-3. Configure the Resend node with `$fromAI()` for dynamic fields:
-   - **To**: `{{ $fromAI('to', 'Recipient email address', 'string') }}`
-   - **Subject**: `{{ $fromAI('subject', 'Email subject', 'string') }}`
-   - **HTML**: `{{ $fromAI('html', 'Email body in HTML', 'string') }}`
-4. The AI agent will automatically fill these values based on context
+## 📚 Documentation
 
-### Available Operations for AI Agents
-
-All operations are available with enhanced descriptions for AI understanding:
-
-- **Email**: Send, send batch, list, get, cancel, update
-- **Templates**: Create, update, publish, duplicate, delete
-- **Contacts**: Create, update, delete, manage segments and topics
-- **Broadcasts**: Create, send, update, delete campaigns
-- **Domains**: Add, verify, update sending domains
-- **Webhooks**: Create, update, delete event listeners
-- **And 6 more resources** (Audiences, Segments, Topics, API Keys, Contact Properties, Receiving Emails)
-
-### Best Practices
-
-1. **Use Descriptive Prompts**: Help the AI understand what you want to accomplish
-2. **Validate Outputs**: Review AI-generated emails before sending
-3. **Set Constraints**: Use validation rules for critical fields like email addresses
-4. **Test First**: Use test mode or sandbox environments when possible
-
-## Resources
-
-- [Resend API Documentation](https://resend.com/docs/api-reference)
-- [n8n Community Nodes Documentation](https://docs.n8n.io/integrations/community-nodes/)
-- [GitHub Repository](https://github.com/Everyday-Workflows/n8n-nodes-resend-full)
-- [Issue Tracker](https://github.com/Everyday-Workflows/n8n-nodes-resend-full/issues)
-
-### Email
+<details>
+<summary><strong>📧 Email Operations</strong></summary>
 
 | Operation        | Description                                       |
 | ---------------- | ------------------------------------------------- |
@@ -186,7 +205,10 @@ All operations are available with enhanced descriptions for AI understanding:
 | List Attachments | List attachments for a sent email                 |
 | Get Attachment   | Get a specific attachment from a sent email       |
 
-### Receiving Email
+</details>
+
+<details>
+<summary><strong>📨 Receiving Email Operations</strong></summary>
 
 | Operation        | Description                                     |
 | ---------------- | ----------------------------------------------- |
@@ -195,7 +217,10 @@ All operations are available with enhanced descriptions for AI understanding:
 | List Attachments | List attachments for a received email           |
 | Get Attachment   | Get a specific attachment from a received email |
 
-### Audience
+</details>
+
+<details>
+<summary><strong>👥 Audience Operations</strong></summary>
 
 | Operation | Description             |
 | --------- | ----------------------- |
@@ -204,7 +229,10 @@ All operations are available with enhanced descriptions for AI understanding:
 | Delete    | Delete an audience      |
 | List      | List all audiences      |
 
-### Contact
+</details>
+
+<details>
+<summary><strong>📝 Contact Operations</strong></summary>
 
 | Operation           | Description                              |
 | ------------------- | ---------------------------------------- |
@@ -219,7 +247,10 @@ All operations are available with enhanced descriptions for AI understanding:
 | Get Topics          | Get topic subscriptions for a contact    |
 | Update Topics       | Update topic subscriptions for a contact |
 
-### Contact Property
+</details>
+
+<details>
+<summary><strong>🏷️ Contact Property Operations</strong></summary>
 
 | Operation | Description                      |
 | --------- | -------------------------------- |
@@ -229,7 +260,10 @@ All operations are available with enhanced descriptions for AI understanding:
 | Delete    | Remove a property                |
 | List      | List all contact properties      |
 
-### Segment
+</details>
+
+<details>
+<summary><strong>🎯 Segment Operations</strong></summary>
 
 | Operation | Description                                          |
 | --------- | ---------------------------------------------------- |
@@ -238,7 +272,10 @@ All operations are available with enhanced descriptions for AI understanding:
 | Delete    | Remove a segment                                     |
 | List      | List all segments                                    |
 
-### Topic
+</details>
+
+<details>
+<summary><strong>🔔 Topic Operations</strong></summary>
 
 | Operation | Description                 |
 | --------- | --------------------------- |
@@ -248,7 +285,10 @@ All operations are available with enhanced descriptions for AI understanding:
 | Delete    | Remove a topic              |
 | List      | List all topics             |
 
-### Broadcast
+</details>
+
+<details>
+<summary><strong>📢 Broadcast Operations</strong></summary>
 
 | Operation | Description                   |
 | --------- | ----------------------------- |
@@ -259,7 +299,10 @@ All operations are available with enhanced descriptions for AI understanding:
 | Delete    | Remove a broadcast            |
 | List      | List all broadcasts           |
 
-### Template
+</details>
+
+<details>
+<summary><strong>📄 Template Operations</strong></summary>
 
 | Operation | Description                    |
 | --------- | ------------------------------ |
@@ -271,7 +314,10 @@ All operations are available with enhanced descriptions for AI understanding:
 | Publish   | Publish a template             |
 | Duplicate | Duplicate an existing template |
 
-### Domain
+</details>
+
+<details>
+<summary><strong>🌐 Domain Operations</strong></summary>
 
 | Operation | Description                 |
 | --------- | --------------------------- |
@@ -282,7 +328,10 @@ All operations are available with enhanced descriptions for AI understanding:
 | Delete    | Remove a domain             |
 | List      | List all domains            |
 
-### API Key
+</details>
+
+<details>
+<summary><strong>🔑 API Key Operations</strong></summary>
 
 | Operation | Description            |
 | --------- | ---------------------- |
@@ -290,7 +339,10 @@ All operations are available with enhanced descriptions for AI understanding:
 | Delete    | Revoke an API key      |
 | List      | List all API keys      |
 
-### Webhook
+</details>
+
+<details>
+<summary><strong>🔗 Webhook Operations</strong></summary>
 
 | Operation | Description               |
 | --------- | ------------------------- |
@@ -300,9 +352,11 @@ All operations are available with enhanced descriptions for AI understanding:
 | Delete    | Remove a webhook          |
 | List      | List all webhooks         |
 
-## Trigger Events
+</details>
 
-The **Resend Trigger** node receives webhooks for real-time email events. Signatures are automatically verified using Svix.
+### Trigger Events
+
+The **Resend Trigger** node receives real-time webhooks for email events. Signatures are automatically verified using Svix.
 
 | Event                    | Description                  |
 | ------------------------ | ---------------------------- |
@@ -324,33 +378,91 @@ The **Resend Trigger** node receives webhooks for real-time email events. Signat
 | `domain.updated`         | Domain modified              |
 | `domain.deleted`         | Domain removed               |
 
-## Limitations
+---
 
-- Maximum email size: 40MB (including attachments)
-- Attachments not supported with scheduled emails
+## 🛠️ Development
 
-## Development
+### Prerequisites
+
+- Node.js >= 20.15
+- npm or pnpm
+
+### Setup
 
 ```bash
 git clone https://github.com/Everyday-Workflows/n8n-nodes-resend-full.git
 cd n8n-nodes-resend-full
 npm install
-npm run build
-npm run lint
 ```
 
-## License
+### Build
 
-[MIT](LICENSE.md)
+```bash
+npm run build
+```
 
-## Acknowledgments
+### Development Mode
 
-Enhanced with contributions from [jannispkz/n8n-nodes-resend-complete](https://github.com/jannispkz/n8n-nodes-resend-complete).
+```bash
+npm run dev
+```
+
+### Linting
+
+```bash
+npm run lint
+npm run lintfix
+```
+
+### Formatting
+
+```bash
+npm run format
+```
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
+### Quick Contributions
+
+- **Bug Reports**: [Open an issue](https://github.com/Everyday-Workflows/n8n-nodes-resend-full/issues)
+- **Feature Requests**: [Open an issue](https://github.com/Everyday-Workflows/n8n-nodes-resend-full/issues)
+- **Pull Requests**: [Submit a PR](https://github.com/Everyday-Workflows/n8n-nodes-resend-full/pulls)
+
+---
+
+## 📋 Limitations
+
+- Maximum email size: 40MB (including attachments)
+- Attachments not supported with scheduled emails
+- AI Agent support requires n8n v1.79.0+
+
+---
+
+## 🔗 Resources
+
+- [Resend API Documentation](https://resend.com/docs/api-reference)
+- [n8n Community Nodes Documentation](https://docs.n8n.io/integrations/community-nodes/)
+- [GitHub Repository](https://github.com/Everyday-Workflows/n8n-nodes-resend-full)
+- [Issue Tracker](https://github.com/Everyday-Workflows/n8n-nodes-resend-full/issues)
+
+---
+
+## 📄 License
+
+[MIT](LICENSE.md) © 2026 Everyday Workflows
 
 ---
 
 <p align="center">
-  <a href="https://github.com/Everyday-Workflows/n8n-nodes-resend-full">GitHub</a> |
-  <a href="https://github.com/Everyday-Workflows/n8n-nodes-resend-full/issues">Issues</a> |
+  Built with ❤️ by <a href="https://everydayworkflows.com">Everyday Workflows</a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/Everyday-Workflows/n8n-nodes-resend-full">GitHub</a> •
+  <a href="https://github.com/Everyday-Workflows/n8n-nodes-resend-full/issues">Issues</a> •
   <a href="https://resend.com/docs">Resend Docs</a>
 </p>
